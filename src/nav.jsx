@@ -1,19 +1,30 @@
 // ===== Header + Footer =====
 
 function Header({ page, onNav }) {
+  const [mobileOpen, setMobileOpen] = React.useState(false);
   const links = [
-  { id: "home", label: "Home" },
-  { id: "about", label: "About" },
-  { id: "solutions", label: "Solutions" },
-  { id: "locations", label: "Locations" },
-  { id: "sustainability", label: "Sustainability" },
-  { id: "faq", label: "FAQ" },
-  { id: "contact", label: "Contact" }];
+    { id: "home", label: "Home" },
+    { id: "about", label: "About" },
+    { id: "solutions", label: "Solutions" },
+    { id: "locations", label: "Locations" },
+    { id: "sustainability", label: "Sustainability" },
+    { id: "faq", label: "FAQ" },
+    { id: "contact", label: "Contact" }];
+
+  // Lock body scroll when drawer is open
+  React.useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = "hidden";
+      return () => { document.body.style.overflow = ""; };
+    }
+  }, [mobileOpen]);
+
+  const navTo = (id) => { setMobileOpen(false); onNav(id); };
 
   return (
     <header className="vgo-header" data-screen-label="Site Header">
       <div className="vgo-wrap-wide vgo-header-inner">
-        <div className="vgo-logo-mark" onClick={() => onNav("home")}>
+        <div className="vgo-logo-mark" onClick={() => navTo("home")}>
           <img src={VGO_LOGO} alt="VGO" style={{ height: "56px", width: "82px" }} />
           <span className="vgo-logo-word"></span>
         </div>
@@ -23,7 +34,6 @@ function Header({ page, onNav }) {
             key={l.id}
             className={"vgo-nav-link" + (page === l.id ? " is-active" : "")}
             onClick={() => onNav(l.id)}>
-            
               {l.label}
             </button>
           )}
@@ -32,8 +42,38 @@ function Header({ page, onNav }) {
           <button className="vgo-btn vgo-btn-dark vgo-btn-arrow" onClick={() => onNav("business")}>
             Partner with VGO <ArrowRight />
           </button>
+          <button
+            className="vgo-mobile-toggle"
+            aria-label="Open menu"
+            onClick={() => setMobileOpen(true)}>
+            <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+              <path d="M2 5h14M2 9h14M2 13h14" />
+            </svg>
+          </button>
         </div>
       </div>
+
+      {mobileOpen && (
+        <div className="vgo-mobile-drawer" role="dialog" aria-modal="true">
+          <button className="vgo-mobile-close" aria-label="Close menu" onClick={() => setMobileOpen(false)}>×</button>
+          {links.map(l => (
+            <button
+              key={l.id}
+              className={"vgo-mobile-link" + (page === l.id ? " is-active" : "")}
+              onClick={() => navTo(l.id)}>
+              {l.label}
+            </button>
+          ))}
+          <div className="vgo-mobile-cta">
+            <button className="vgo-btn vgo-btn-dark vgo-btn-arrow" style={{ justifyContent: "center" }} onClick={() => navTo("business")}>
+              Partner with VGO <ArrowRight />
+            </button>
+            <a href="mailto:hello@vgokw.com" className="vgo-btn vgo-btn-outline" style={{ justifyContent: "center" }}>
+              hello@vgokw.com
+            </a>
+          </div>
+        </div>
+      )}
     </header>);
 
 }

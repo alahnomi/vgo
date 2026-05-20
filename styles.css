@@ -433,10 +433,198 @@ button { font-family: inherit; cursor: pointer; }
 .vgo-arrow-icon { width: 14px; height: 14px; }
 
 /* responsive */
-@media (max-width: 900px) {
-  .vgo-section-head { grid-template-columns: 1fr; gap: 24px; }
-  .vgo-footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
-  .vgo-header-inner { height: 64px; }
-  .vgo-nav { display: none; }
-  .vgo-section { padding: 64px 0; }
+@media (max-width: 1100px) {
+  .vgo-wrap, .vgo-wrap-wide {
+    padding: 0 24px;
+  }
+  .vgo-nav { gap: 0; }
+  .vgo-nav-link { padding: 8px 10px; font-size: 13px; }
 }
+
+@media (max-width: 900px) {
+  :root {
+    --vgo-gutter: 20px;
+  }
+  .vgo-wrap, .vgo-wrap-wide {
+    padding: 0 20px;
+  }
+  .vgo-section-head { grid-template-columns: 1fr; gap: 24px; padding-bottom: 40px; }
+  .vgo-footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; padding-bottom: 40px; }
+  .vgo-header-inner { height: 68px; }
+  .vgo-logo-mark img { height: 40px !important; width: auto !important; }
+  .vgo-nav { display: none; }
+  .vgo-header-cta .vgo-btn { display: none; }
+  .vgo-section { padding: 56px 0; }
+  .vgo-section-lg { padding: 72px 0; }
+  .vgo-section-sm { padding: 40px 0; }
+
+  /* Stack ALL inline-styled grid layouts on mobile */
+  [style*="grid-template-columns"] {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+  /* Exceptions — keep these multi-column on tablet */
+  .vgo-keep-grid-2[style*="grid-template-columns"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* Footer keeps a 2-col grid on tablet */
+  .vgo-footer-grid { grid-template-columns: 1fr 1fr !important; }
+
+  /* Type scaling */
+  .vgo-display { font-size: clamp(40px, 9vw, 64px) !important; }
+
+  /* Container max-heights for embedded media */
+  .vgo-section .vgo-ph,
+  .vgo-section iframe {
+    max-height: 360px;
+  }
+
+  /* Hide footer-logo plate on tablet */
+  .vgo-footer { padding: 56px 0 24px; }
+  .vgo-footer-bottom { flex-direction: column; gap: 8px; }
+}
+
+@media (max-width: 600px) {
+  :root {
+    --vgo-gutter: 16px;
+  }
+  .vgo-wrap, .vgo-wrap-wide {
+    padding: 0 16px;
+  }
+  .vgo-section { padding: 48px 0; }
+  .vgo-section-lg { padding: 56px 0; }
+  .vgo-section-sm { padding: 32px 0; }
+
+  /* Header */
+  .vgo-header-inner { height: 60px; gap: 12px; }
+  .vgo-logo-mark img { height: 34px !important; width: auto !important; }
+  .vgo-logo-word { font-size: 18px; }
+
+  /* Type */
+  .vgo-display { font-size: clamp(36px, 12vw, 52px) !important; line-height: 0.95 !important; }
+  .vgo-h1 { font-size: clamp(32px, 8vw, 44px) !important; }
+  .vgo-h2 { font-size: clamp(26px, 6.5vw, 36px) !important; }
+  .vgo-h3 { font-size: clamp(20px, 5vw, 24px) !important; }
+  .vgo-lead { font-size: 16px !important; line-height: 1.5 !important; }
+  .vgo-stat-num { font-size: clamp(44px, 12vw, 64px) !important; }
+  .vgo-serif-quote { font-size: clamp(24px, 6vw, 32px) !important; }
+
+  /* Buttons */
+  .vgo-btn { padding: 12px 18px; font-size: 14px; }
+
+  /* Footer — single column on phones */
+  .vgo-footer-grid { grid-template-columns: 1fr !important; gap: 24px; }
+  .vgo-footer-bottom { font-size: 11px; text-align: left; }
+
+  /* Force any explicit gap values down */
+  [style*="gap: 64px"] { gap: 32px !important; }
+  [style*="gap: 80px"] { gap: 32px !important; }
+  [style*="gap: 48px"] { gap: 24px !important; }
+  [style*="gap: 56px"] { gap: 28px !important; }
+
+  /* Pad rows */
+  [style*="padding: 40"] { padding: 24px !important; }
+  [style*="padding: 48"] { padding: 24px !important; }
+  [style*="padding: 56"] { padding: 28px !important; }
+  [style*="padding: 64"] { padding: 28px !important; }
+
+  /* Mobile-fit images */
+  img { max-width: 100%; height: auto; }
+
+  /* Hero tag rows compact */
+  .vgo-hero-tagrow { gap: 6px; margin-bottom: 20px; }
+  .vgo-tag { font-size: 10px; padding: 4px 8px; }
+  .vgo-eyebrow { font-size: 11px; }
+
+  /* Marquee slower padding */
+  .vgo-marquee-track { padding: 14px 0; gap: 32px; font-size: 11px; }
+
+  /* Forms */
+  .vgo-input, .vgo-textarea, .vgo-select { padding: 12px 14px; font-size: 16px; }
+
+  /* Locations: stack sidebar above map */
+  .vgo-locations-grid { grid-template-columns: 1fr !important; }
+  .vgo-locations-sidebar { position: static !important; }
+
+  /* Map iframe shorter on phones */
+  .vgo-section iframe { min-height: 320px; max-height: 420px; }
+
+  /* Marquee shrink */
+  .vgo-marquee-item::after { font-size: 12px; }
+}
+
+/* ===== Mobile nav (hamburger menu) ===== */
+.vgo-mobile-toggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--vgo-ink);
+  background: transparent;
+  border-radius: var(--vgo-radius-pill);
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  cursor: pointer;
+}
+.vgo-mobile-toggle:hover { background: rgba(0,0,0,0.06); }
+.vgo-mobile-toggle svg { width: 18px; height: 18px; }
+
+@media (max-width: 900px) {
+  .vgo-mobile-toggle { display: inline-flex; }
+}
+
+.vgo-mobile-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: var(--vgo-yellow);
+  padding: 80px 24px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  overflow-y: auto;
+  animation: vgo-fadein 0.25s ease;
+}
+.vgo-mobile-drawer .vgo-mobile-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 16px;
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  color: var(--vgo-ink);
+  border-bottom: 1px solid rgba(0,0,0,0.12);
+  cursor: pointer;
+  background: transparent;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  text-align: left;
+  width: 100%;
+  font-family: inherit;
+}
+.vgo-mobile-drawer .vgo-mobile-link.is-active { color: var(--vgo-ink); font-weight: 600; }
+.vgo-mobile-drawer .vgo-mobile-link.is-active::after { content: "●"; font-size: 12px; }
+.vgo-mobile-drawer .vgo-mobile-cta {
+  margin-top: 24px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.vgo-mobile-drawer .vgo-mobile-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  background: var(--vgo-ink);
+  color: var(--vgo-yellow);
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+

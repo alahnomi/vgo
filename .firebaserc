@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "vgo-kw"
-  }
+    "default": "vgokw-de13c",
+    "pro": "vgokw-de13c"
+  },
+  "targets": {},
+  "etags": {}
 }
